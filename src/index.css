@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+:root {
+  /* Light Theme Tokens */
+  --bg-primary: #FAFBFC;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F3F4F6;
+  --accent: #6366F1;
+  --accent-soft: rgba(99, 102, 241, 0.1);
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --border: #E5E7EB;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Theme Tokens */
+    --bg-primary: #0F1117;
+    --bg-surface: #1A1D27;
+    --bg-elevated: #252836;
+    --accent: #818CF8;
+    --accent-soft: rgba(129, 140, 248, 0.15);
+    --text-primary: #F9FAFB;
+    --text-secondary: #9CA3AF;
+    --border: #2E3347;
+    --success: #34D399;
+    --warning: #FBBF24;
+    --danger: #F87171;
+  }
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
