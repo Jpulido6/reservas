@@ -12,12 +12,18 @@ export const ReservasPage = () => {
   const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Helper to format date for API
+  // Helper to format date for API with Colombia timezone (-05:00)
   const getStartOfDay = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate()).toISOString();
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}T00:00:00-05:00`;
   };
   const getEndOfDay = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999).toISOString();
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}T23:59:59.999-05:00`;
   };
 
   const [estadoFilter, setEstadoFilter] = useState<string>('');
@@ -79,7 +85,7 @@ export const ReservasPage = () => {
             </Button>
             <h2 className="text-lg font-semibold ml-4 capitalize flex items-center gap-2">
               <CalendarIcon size={20} className="text-accent" />
-              {currentDate.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+              {currentDate.toLocaleDateString('es-ES', { timeZone: 'America/Bogota', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </h2>
           </div>
         </div>
@@ -131,8 +137,8 @@ export const ReservasPage = () => {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-bold text-lg">
-                          {new Date(reserva.fechaInicio).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })} -
-                          {new Date(reserva.fechaFin).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+                          {new Date(reserva.fechaInicio).toLocaleTimeString('es-ES', { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit' })} -
+                          {new Date(reserva.fechaFin).toLocaleTimeString('es-ES', { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit' })}
                         </span>
                         <span className={`text-xs px-2 py-0.5 rounded-full border ${getStatusColor(reserva.estado.code)}`}>
                           {reserva.estado.forHumans}

@@ -21,7 +21,19 @@ export const NuevaReservaPage = () => {
 
   const [servicioId, setServicioId] = useState<number | null>(null);
   const [recursoId, setRecursoId] = useState<number | null>(null);
-  const [fecha, setFecha] = useState<string>(new Date().toISOString().split('T')[0]);
+  const getColombiaDateString = () => {
+    // Returns YYYY-MM-DD in Colombia timezone
+    const date = new Date();
+    const formatter = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Bogota',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+    return formatter.format(date);
+  };
+
+  const [fecha, setFecha] = useState<string>(getColombiaDateString());
   const [horarioSeleccionado, setHorarioSeleccionado] = useState<{ start: string, end: string } | null>(null);
 
   const { data: servicios, isLoading: loadingServicios } = useServicios();
@@ -339,6 +351,7 @@ export const NuevaReservaPage = () => {
                           {bloque.rangos.map((rango: any, idx: number) => {
                             const isSelected = horarioSeleccionado?.start === rango.start;
                             const timeStr = new Date(rango.start).toLocaleTimeString('es-ES', {
+                              timeZone: 'America/Bogota',
                               hour: '2-digit',
                               minute: '2-digit',
                             });
@@ -412,6 +425,7 @@ export const NuevaReservaPage = () => {
                     <span className="font-semibold text-accent text-right max-w-[200px] capitalize">
                       {horarioSeleccionado
                         ? new Date(horarioSeleccionado.start).toLocaleString('es-ES', {
+                          timeZone: 'America/Bogota',
                           weekday: 'long',
                           year: 'numeric',
                           month: 'long',

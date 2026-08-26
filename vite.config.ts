@@ -8,11 +8,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/v1': {
-        target: 'http://192.168.1.44:3000',
+        target: 'http://192.168.1.47:3000',
         changeOrigin: true,
       },
       '/public': {
-        target: 'http://192.168.1.44:3000',
+        target: 'http://192.168.1.47:3000',
         changeOrigin: true,
       }
     }
